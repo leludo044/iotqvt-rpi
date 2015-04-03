@@ -1,4 +1,4 @@
-name := """myApp"""
+name := """domobyPi"""
 
 version := "1.0-SNAPSHOT"
 
