@@ -1,0 +1,15 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+#GET     /                           controllers.Application.index()
+GET     /               controllers.Assets.at(path="/public", file="index.html")
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
+
+GET		/led						controllers.Application.ledState()
+GET		/led/:switch				controllers.Application.led(switch: String)
+GET		/json/led				controllers.jsonController.ledState()
+GET		/json/led/:switch				controllers.jsonController.led(switch: String)
