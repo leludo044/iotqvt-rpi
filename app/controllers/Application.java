@@ -4,7 +4,6 @@ import net.leludo.domobypi.components.Led;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.index;
-import views.html.test;
 
 
 
@@ -14,7 +13,7 @@ public class Application extends Controller
 
     public static Result index()
     {
-        return ok(index.render("Your new application is ready."));
+        return ok(index.render("off"));
     }
 
     public static Result led(String sw)
@@ -26,13 +25,12 @@ public class Application extends Controller
         {
             led.off();
         }
-        return ok(test.render(led.getName() + " led switched to "
-                + led.getState()));
+        return ledState();
     }
 
     public static Result ledState()
     {
-        return ok(test.render(led.getName() + " led is " + led.getState()));
+        return ok(index.render(led.getState()));
     }
 
 }
