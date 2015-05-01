@@ -1,11 +1,17 @@
-angular.module('domobyPi', []).value('url', 'http://localhost:9000/json');
+angular.module('domobyPi', []).value('url', 'http://pi:9000/json');
 angular.module('domobyPi').config(['$controllerProvider', function ($controllerProvider) {
     $controllerProvider.allowGlobals();
 }]);
 
 angular.module('domobyPi')
     .controller('LedController', function ($scope, $http, url) {
-        $scope.led = "off";
+    	
+    	ledState = function () {
+            $http.get(url + '/ledstate').success(function (data) {
+                $scope.led = data.led;
+            });
+        };
+        ledState() ;
         $scope.isOn = function() {
             return $scope.led == "on" ;
         };

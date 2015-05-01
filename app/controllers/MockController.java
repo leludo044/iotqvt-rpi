@@ -9,7 +9,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 
 
-public class jsonController extends Controller
+public class MockController extends Controller
 {
     private static Led led = new Led("red");
 
