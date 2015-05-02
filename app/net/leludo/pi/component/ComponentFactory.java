@@ -3,18 +3,18 @@ package net.leludo.pi.component;
 import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.GpioFactory;
 
-public class ComponentManager {
+public class ComponentFactory {
 
-	static ComponentManager instance;
+	static ComponentFactory instance;
 	final GpioController gpio;
 
-	private ComponentManager() {
+	private ComponentFactory() {
 		gpio = GpioFactory.getInstance();
 	}
 
-	public static final ComponentManager getInstance() {
+	public static final ComponentFactory getInstance() {
 		if (instance == null)
-			instance = new ComponentManager();
+			instance = new ComponentFactory();
 		return instance;
 	}
 

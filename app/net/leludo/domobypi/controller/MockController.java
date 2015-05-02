@@ -1,6 +1,6 @@
-package controllers;
+package net.leludo.domobypi.controller;
 
-import net.leludo.domobypi.components.Led;
+import net.leludo.pi.component.mock.Led;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;

@@ -7,10 +7,10 @@ import com.pi4j.io.gpio.PinState;
 public class Component {
 
 	private String name ;
-	private ComponentManager manager ;
+	private ComponentFactory manager ;
 	protected GpioPinDigitalOutput pin ;
 	
-	protected Component(ComponentManager manager, String name) {
+	protected Component(ComponentFactory manager, String name) {
 		this.name = name ;
 		this.manager = manager ;
 	}

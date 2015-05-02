@@ -1,4 +1,4 @@
-package net.leludo.domobypi.components;
+package net.leludo.pi.component.mock;
 
 public class Led
 {

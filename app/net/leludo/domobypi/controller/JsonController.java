@@ -1,6 +1,6 @@
-package controllers;
+package net.leludo.domobypi.controller;
 
-import net.leludo.pi.component.ComponentManager;
+import net.leludo.pi.component.ComponentFactory;
 import net.leludo.pi.component.Led;
 import net.leludo.pi.component.PiPins;
 import play.libs.Json;
@@ -13,7 +13,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class JsonController extends Controller
 {
-    private static ComponentManager manager = ComponentManager.getInstance() ;
+    private static ComponentFactory manager = ComponentFactory.getInstance() ;
     private static Led led = (Led)manager.createComponent("led", "Red led", PiPins.TWELVE) ;
     
 

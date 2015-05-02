@@ -2,7 +2,7 @@ package net.leludo.pi.component;
 
 public class Led extends Component {
 
-	protected Led(ComponentManager manager, String name) {
+	protected Led(ComponentFactory manager, String name) {
 		super(manager, name);
 	}
 
