@@ -1,4 +1,4 @@
-angular.module('domobyPi', []).value('url', 'http://pi:9000/json');
+angular.module('domobyPi', []).value('url', 'http://leludo.dtdns.net:9000/json');
 angular.module('domobyPi').config(['$controllerProvider', function ($controllerProvider) {
     $controllerProvider.allowGlobals();
 }]);
