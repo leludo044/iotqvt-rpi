@@ -1,8 +1,11 @@
 package net.leludo.domobypi.controller;
 
+import java.io.IOException;
+
 import net.leludo.pi.component.ComponentFactory;
 import net.leludo.pi.component.Led;
 import net.leludo.pi.component.PiPins;
+import net.leludo.pi.component.Sensor;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -33,6 +36,13 @@ public class JsonController extends Controller
     {
     	ObjectNode result = Json.newObject() ;
     	result.put("led", led.getState()) ;
+    	return ok(result) ;    	
+    }
+    
+    public static Result sensor() throws IOException {
+    	float temp = new Sensor().read() ;
+    	ObjectNode result = Json.newObject() ;
+    	result.put("temp", temp) ;
     	return ok(result) ;    	
     }
 

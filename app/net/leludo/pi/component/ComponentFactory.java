@@ -24,7 +24,7 @@ public class ComponentFactory {
 		if ("led".equals(type)) {
 			component = new Led(this, name);
 			component.connect(pin);
-		}
+		} 
 		return component;
 	}
 
