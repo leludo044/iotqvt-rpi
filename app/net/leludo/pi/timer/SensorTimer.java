@@ -27,7 +27,6 @@ public class SensorTimer extends TimerTask {
 			date = new Date().getTime() ;
 			temp = new Sensor().read();
 			StringBuffer sb = new StringBuffer() ;
-			temp = new Long(Math.round(20000+(Math.random()*5000))).toString();
 			sb.append("{") ;
 			sb.append("\"").append("id").append("\"") ;
 			sb.append(":").append("\"").append(name).append("\"");

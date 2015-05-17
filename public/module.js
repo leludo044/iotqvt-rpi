@@ -1,13 +1,15 @@
 var testConnectivity = {
     serveur: "ludo1:9000",
     ledstate: "/mock/ledstate",
-    led: "/mock/led"
+    led: "/mock/led",
+    websocket: "/mock/socket"
 };
 
 var piConnectivity = {
     serveur: "pi:9000",
     ledstate: "/json/ledstate",
-    led: "/json/led"
+    led: "/json/led",
+    websocket: "/socket"
 };
 
 var domobypi = angular.module('domobyPi', [])
@@ -99,7 +101,7 @@ angular.module('domobyPi').factory('temperatureService', function ($q, connect) 
         self.start = function (scope) {
             registeredScope = scope;
             console.log("starting with " + registeredScope);
-            ws = new WebSocket("ws://" + connect.serveur + "/socket");
+            ws = new WebSocket("ws://" + connect.serveur + connect.websocket);
 
             ws.onopen = function () {
                 console.log("Socket has been opened!");
