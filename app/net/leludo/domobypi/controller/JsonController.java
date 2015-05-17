@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class JsonController extends Controller
 {
+	
     private static ComponentFactory manager = ComponentFactory.getInstance() ;
     private static Led led = (Led)manager.createComponent("led", "Red led", PiPins.TWELVE) ;
     
@@ -40,7 +41,7 @@ public class JsonController extends Controller
     }
     
     public static Result sensor() throws IOException {
-    	float temp = new Sensor().read() ;
+    	String temp = new Sensor().read() ;
     	ObjectNode result = Json.newObject() ;
     	result.put("temp", temp) ;
     	return ok(result) ;    	
