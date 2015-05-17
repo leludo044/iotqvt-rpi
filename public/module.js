@@ -1,15 +1,29 @@
-angular.module('domobyPi', [])
-    .value('url', 'http://pi:9000/json');
-angular.module('domobyPi').config(
+var testConnectivity = {
+    serveur: "ludo1:9000",
+    ledstate: "/mock/ledstate",
+    led: "/mock/led"
+};
+
+var piConnectivity = {
+    serveur: "pi:9000",
+    ledstate: "/json/ledstate",
+    led: "/json/led"
+};
+
+var domobypi = angular.module('domobyPi', [])
+
+domobypi.value("connect", piConnectivity);
+
+domobypi.config(
   ['$controllerProvider', function ($controllerProvider) {
         $controllerProvider.allowGlobals();
   }]);
 
 angular.module('domobyPi').controller('LedController',
-    function ($scope, $http, url, temperatureService) {
+    function ($scope, $http, connect, temperatureService) {
 
         ledState = function () {
-            $http.get(url + '/ledstate').success(function (data) {
+            $http.get('http://' + connect.serveur + connect.ledstate).success(function (data) {
                 $scope.led = data.led;
             });
         };
@@ -18,12 +32,12 @@ angular.module('domobyPi').controller('LedController',
             return $scope.led == "on";
         };
         $scope.ledOn = function () {
-            $http.get(url + '/led/on').success(function (data) {
+            $http.get('http://' + connect.serveur + connect.led + '/on').success(function (data) {
                 $scope.led = data.led;
             });
         };
         $scope.ledOff = function () {
-            $http.get(url + '/led/off').success(function (data) {
+            $http.get('http://' + connect.serveur + connect.led + '/off').success(function (data) {
                 $scope.led = data.led;
             });
         };
@@ -35,8 +49,11 @@ angular.module('domobyPi').controller('LedController',
         };
         //sensor();
 
+        $scope.temps = [];
+
         $scope.updateTemp = function (sensor) {
             $scope.temp = Math.round(sensor.temp / 1000 * 100) / 100;
+            $scope.temps.push($scope.temp);
             if ($scope.minTemp == null) {
                 $scope.minTemp = $scope.temp;
             }
@@ -45,6 +62,9 @@ angular.module('domobyPi').controller('LedController',
             } else if ($scope.temp > $scope.maxTemp) {
                 $scope.maxTemp = $scope.temp;
             }
+            $scope.message = "titi";
+            console.log($scope.temps);
+            $scope.updateChart($scope.temp);
         }
         $scope.temp = 0;
         $scope.date = null;
@@ -53,9 +73,19 @@ angular.module('domobyPi').controller('LedController',
 
         temperatureService.start($scope);
 
+        $scope.message = "toto";
+
+        $scope.chart;
+
+        $scope.updateChart = function (value) {
+            console.log("updating chart...");
+            $scope.chart.series[0].addPoint(value);
+            $scope.chart.redraw();
+        }
+
     });
 
-angular.module('domobyPi').factory('temperatureService', function ($q) {
+angular.module('domobyPi').factory('temperatureService', function ($q, connect) {
 
     function temperatureService() {
         var self = this;
@@ -69,7 +99,7 @@ angular.module('domobyPi').factory('temperatureService', function ($q) {
         self.start = function (scope) {
             registeredScope = scope;
             console.log("starting with " + registeredScope);
-            ws = new WebSocket("ws://pi:9000/socket");
+            ws = new WebSocket("ws://" + connect.serveur + "/socket");
 
             ws.onopen = function () {
                 console.log("Socket has been opened!");
@@ -83,10 +113,7 @@ angular.module('domobyPi').factory('temperatureService', function ($q) {
 
                 sensor = JSON.parse(message.data);
                 date = new Date(sensor.date);
-                //                self.temp = message.data.temp;
                 registeredScope.$apply(function () {
-                    //                    registeredScope.temp = Math.round(sensor.temp / 1000 * 100) / 100;
-                    //                    registeredScope.date = date;
                     registeredScope.updateTemp(sensor);
                 });
                 deffered.resolve(message);

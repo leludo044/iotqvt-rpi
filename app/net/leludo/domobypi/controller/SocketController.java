@@ -1,6 +1,6 @@
 package net.leludo.domobypi.controller;
 
-import net.leludo.pi.timer.SensorWebSocket;
+import net.leludo.pi.component.mock.SensorWebSocketMock;
 import play.mvc.Controller;
 import play.mvc.WebSocket;
 
@@ -15,6 +15,6 @@ public class SocketController extends Controller
 //	        out.close();
 //	    });
 		
-		return new SensorWebSocket() ;
+		return new SensorWebSocketMock() ;
 	}
 }

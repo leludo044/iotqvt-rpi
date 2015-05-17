@@ -11,6 +11,7 @@ GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
 #GET		/led						controllers.Application.ledState()
 #GET		/led/:switch				controllers.Application.led(switch: String)
+GET		/mock/ledstate			net.leludo.domobypi.controller.MockController.ledState()
 GET		/mock/led/:switch			net.leludo.domobypi.controller.MockController.led(switch: String)
 GET		/json/ledstate						net.leludo.domobypi.controller.JsonController.ledState()
 GET		/json/led/:switch				net.leludo.domobypi.controller.JsonController.led(switch: String)
