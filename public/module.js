@@ -12,9 +12,16 @@ var piConnectivity = {
     websocket: "/socket"
 };
 
+var internetConnectivity = {
+    serveur: "leludo.dtdns.net:9000",
+    ledstate: "/json/ledstate",
+    led: "/json/led",
+    websocket: "/socket"
+};
+
 var domobypi = angular.module('domobyPi', [])
 
-domobypi.value("connect", piConnectivity);
+domobypi.value("connect", internetConnectivity);
 
 domobypi.config(
   ['$controllerProvider', function ($controllerProvider) {
