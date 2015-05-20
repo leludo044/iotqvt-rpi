@@ -1,2 +1,2 @@
-# domobypi
-Domotic project over Raspberry PI
+# iotqvt-rpi
+Objet connecté client du l'iotqvt
