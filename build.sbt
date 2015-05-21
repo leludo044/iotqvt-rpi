@@ -1,4 +1,4 @@
-name := """domobyPi"""
+name := """iotqvt-rpi"""
 
 version := "1.0-SNAPSHOT"
 
