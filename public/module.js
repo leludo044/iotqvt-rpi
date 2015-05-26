@@ -21,7 +21,7 @@ var internetConnectivity = {
 
 var domobypi = angular.module('domobyPi', [])
 
-domobypi.value("connect", internetConnectivity);
+  domobypi.value("connect", piConnectivity);
 
 domobypi.config(
   ['$controllerProvider', function ($controllerProvider) {
