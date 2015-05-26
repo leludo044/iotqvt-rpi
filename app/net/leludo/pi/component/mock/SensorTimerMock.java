@@ -3,6 +3,9 @@ package net.leludo.pi.component.mock;
 import java.util.Date;
 import java.util.TimerTask;
 
+import javax.websocket.Session;
+
+import net.leludo.pi.timer.SensorWebsocketClient;
 import play.mvc.WebSocket.Out;
 
 public class SensorTimerMock extends TimerTask {
@@ -12,11 +15,20 @@ public class SensorTimerMock extends TimerTask {
 	long date ;
 	
 	Out<String> out ;
+	SensorWebsocketClient wsc ;
 
 	public SensorTimerMock(play.mvc.WebSocket.Out<String> arg1) {
 		out = arg1 ;
 		temp = "unknown" ;
 		name = "Ludo";
+		wsc = null ;
+	}
+	
+	public SensorTimerMock(SensorWebsocketClient swsc) {
+		this.wsc = swsc ;
+		temp="unknown";
+		name = "Ludo" ;
+		out = null ;
 	}
 
 	@Override
@@ -36,6 +48,12 @@ public class SensorTimerMock extends TimerTask {
 		sb.append("}");
 		
 		System.out.println(sb.toString());
-		out.write(sb.toString());
+		if (out != null) {
+			out.write(sb.toString());
+		} 
+		
+		if (wsc != null) {
+			wsc.sendMessage(sb.toString());
+		}
 	}
 }

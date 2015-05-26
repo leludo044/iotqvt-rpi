@@ -12,7 +12,7 @@ public class SensorWebSocket extends WebSocket<String> {
 	public void onReady(WebSocket.In<String> arg0,
 			WebSocket.Out<String> arg1) {
 		
-		Timer t = new Timer("sensor");
+		final Timer t = new Timer("sensor");
 		t.schedule(new SensorTimer(arg1), 0, 5000);
 		
 		// For each event received on the socket,

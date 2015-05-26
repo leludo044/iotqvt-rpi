@@ -12,3 +12,9 @@ libraryDependencies ++= Seq(
   cache,
   javaWs
 )
+
+libraryDependencies += "javax.websocket" % "javax.websocket-api" % "1.1"
+
+libraryDependencies += "org.glassfish.tyrus" % "tyrus-server" % "1.10"
+
+libraryDependencies += "org.glassfish.tyrus" % "tyrus-container-grizzly-server" % "1.10"
