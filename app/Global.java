@@ -4,6 +4,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Enumeration;
+import java.util.Iterator;
 import java.util.Properties;
 import java.util.Timer;
 
@@ -42,6 +43,13 @@ public class Global extends GlobalSettings {
 		try {
 			// Recherche du fichier de propriétés
 			URL propertyFileurl = app.resource(PROPERTY_FILENAME);
+
+//			ApplicationProperties ap = new ApplicationProperties();
+//			ap.load(propertyFileurl.openStream());
+//			
+//			for(Iterator<String> i = ap.elements() ; i.hasNext(); ) {
+//				Logger.info(i.next()) ;
+//			}
 			
 			// Chargement des propriétés
 			Logger.info("Loading properties from " + propertyFileurl.getFile()
